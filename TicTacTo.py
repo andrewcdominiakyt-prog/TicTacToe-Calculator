@@ -1,7 +1,7 @@
 player1 = "X"
 player2 = "O"
 
-
+rounds = 0
 
 one_one = 0
 one_two = 0
@@ -16,6 +16,8 @@ three_three = 0
 player1_turn = True
 player2_turn = False
 
+gamerunning= False
+
 
 board = [[one_one, one_two, one_three],
          [two_one, two_two, two_three],
@@ -27,11 +29,11 @@ def print_board():
 
 
 def player1turn():  
+    global rounds
     if player1_turn == True: 
-        print("player 1 turn")
         while True:
             print_board()
-            player1_input = input("please select a square (1-9): ")
+            player1_input = input("PLAYER 1 TURN. SELECT A SPACE (1-9): ")
             if player1_input == "1":
                 if board[0][0] == "X" or board[0][0] == "O":
                     print("square taken, pick again")
@@ -64,6 +66,7 @@ def player1turn():
                 break
             elif player1_input == "6":
                 if board[1][2] == "X" or board[1][2] == "O":
+                    print("square taken, pick again")
                     continue
                 board[1][2] = "X"
                 break
@@ -89,13 +92,15 @@ def player1turn():
                 print("invalid input")
                 continue
             break
-        
+        rounds += 1
+
+    
 def player2turn():  
+    global rounds
     if player2_turn == True: 
-        print("player 2 turn")
         while True:
             print_board()
-            player2_input = input("please select a square (1-9): ")
+            player2_input = input("PLAYER 2 TURN. SELECT A SPACE (1-9): ")
             if player2_input == "1":
                 if board[0][0] == "X" or board[0][0] == "O":
                     print("square taken, pick again")
@@ -153,5 +158,29 @@ def player2turn():
             else:
                 print("invalid input")
                 continue
+            break
+        rounds += 1
 
-player1turn()
+
+gamerunning = True
+
+while gamerunning == True:
+    
+    if rounds == 9:
+        print("BOARD FULL. GAME OVER.")
+        print_board()
+        break
+    if player1_turn == True:
+        player1turn()
+        player1_turn = False
+        player2_turn = True
+    elif player2_turn == True:
+        player2turn()
+        player2_turn = False
+        player1_turn = True
+    
+    else:
+        print("error")
+        break
+
+    
