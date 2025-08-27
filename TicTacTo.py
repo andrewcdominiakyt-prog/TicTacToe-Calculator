@@ -25,35 +25,28 @@ board = [[one_one, one_two, one_three],
 
 
 def gamewin():
-    # Check all win conditions for X
-    if (board[0][0] == "X" and board[0][1] == "X" and board[0][2] == "X") or \
-       (board[1][0] == "X" and board[1][1] == "X" and board[1][2] == "X") or \
-       (board[2][0] == "X" and board[2][1] == "X" and board[2][2] == "X") or \
-       (board[0][0] == "X" and board[1][0] == "X" and board[2][0] == "X") or \
-       (board[0][1] == "X" and board[1][1] == "X" and board[2][1] == "X") or \
-       (board[0][2] == "X" and board[1][2] == "X" and board[2][2] == "X") or \
-       (board[0][0] == "X" and board[1][1] == "X" and board[2][2] == "X") or \
-       (board[0][2] == "X" and board[1][1] == "X" and board[2][0] == "X"):
-        print_board()
-        print("P1 WINS")
+    # rows
+    for r in range(3):
+        if board[r][0] == board[r][1] == board[r][2] != "#":
+            print_board(); print(("P1" if board[r][0]=="X" else "P2")+" WINS")
+            return True
+    # cols
+    for c in range(3):
+        if board[0][c] == board[1][c] == board[2][c] != "#":
+            print_board(); print(("P1" if board[0][c]=="X" else "P2")+" WINS")
+            return True
+    # diagonals
+    if board[0][0] == board[1][1] == board[2][2] != "#":
+        print_board(); print(("P1" if board[0][0]=="X" else "P2")+" WINS")
         return True
-    # Check all win conditions for O
-    if (board[0][0] == "O" and board[0][1] == "O" and board[0][2] == "O") or \
-       (board[1][0] == "O" and board[1][1] == "O" and board[1][2] == "O") or \
-       (board[2][0] == "O" and board[2][1] == "O" and board[2][2] == "O") or \
-       (board[0][0] == "O" and board[1][0] == "O" and board[2][0] == "O") or \
-       (board[0][1] == "O" and board[1][1] == "O" and board[2][1] == "O") or \
-       (board[0][2] == "O" and board[1][2] == "O" and board[2][2] == "O") or \
-       (board[0][0] == "O" and board[1][1] == "O" and board[2][2] == "O") or \
-       (board[0][2] == "O" and board[1][1] == "O" and board[2][0] == "O"):
-        print_board()
-        print("P2 WINS")
+    if board[0][2] == board[1][1] == board[2][0] != "#":
+        print_board(); print(("P1" if board[0][2]=="X" else "P2")+" WINS")
         return True
     return False
 
 def print_board():
     for row in board:
-        print(' '.join([str(cell) for cell in row]))
+        print(row[0], row[1], row[2])
 
         # remember to switch the inputs to calculator positions after finishing the game
 
@@ -63,19 +56,19 @@ def player1turn():
         while True:
             print_board()
             player1_input = input("P1 SELECT A SPACE (1-9): ")
-            if player1_input == "1":
+            if player1_input == "7":
                 if board[0][0] == "X" or board[0][0] == "O":
                     print("square taken, pick again")
                     continue
                 board[0][0] = "X"
                 break
-            elif player1_input == "2":
+            elif player1_input == "8":
                 if board[0][1] == "X" or board[0][1] == "O":
                     print("square taken, pick again")
                     continue
                 board[0][1] = "X"
                 break
-            elif player1_input == "3":
+            elif player1_input == "9":
                 if board[0][2] == "X" or board[0][2] == "O":
                     print("square taken, pick again")
                     continue
@@ -99,19 +92,19 @@ def player1turn():
                     continue
                 board[1][2] = "X"
                 break
-            elif player1_input == "7":
+            elif player1_input == "1":
                 if board[2][0] == "X" or board[2][0] == "O":
                     print("square taken, pick again")
                     continue
                 board[2][0] = "X"
                 break
-            elif player1_input == "8":
+            elif player1_input == "2":
                 if board[2][1] == "X" or board[2][1] == "O":
                     print("square taken, pick again")
                     continue
                 board[2][1] = "X"
                 break
-            elif player1_input == "9":
+            elif player1_input == "3":
                 if board[2][2] == "X" or board[2][2] == "O":
                     print("square taken, pick again")
                     continue
@@ -130,19 +123,19 @@ def player2turn():
         while True:
             print_board()
             player2_input = input("P2 SELECT A SPACE (1-9): ")
-            if player2_input == "1":
+            if player2_input == "7":
                 if board[0][0] == "X" or board[0][0] == "O":
                     print("square taken, pick again")
                     continue
                 board[0][0] = "O"
                 break
-            elif player2_input == "2":
+            elif player2_input == "8":
                 if board[0][1] == "X" or board[0][1] == "O":
                     print("square taken, pick again")
                     continue
                 board[0][1] = "O"
                 break
-            elif player2_input == "3":
+            elif player2_input == "9":
                 if board[0][2] == "X" or board[0][2] == "O":
                     print("square taken, pick again")
                     continue
@@ -166,19 +159,19 @@ def player2turn():
                     continue
                 board[1][2] = "O"
                 break
-            elif player2_input == "7":
+            elif player2_input == "1":
                 if board[2][0] == "X" or board[2][0] == "O":
                     print("square taken, pick again")
                     continue
                 board[2][0] = "O"
                 break
-            elif player2_input == "8":
+            elif player2_input == "2":
                 if board[2][1] == "X" or board[2][1] == "O":
                     print("square taken, pick again")
                     continue
                 board[2][1] = "O"
                 break
-            elif player2_input == "9":
+            elif player2_input == "3":
                 if board[2][2] == "X" or board[2][2] == "O":
                     print("square taken, pick again")
                     continue
@@ -211,4 +204,3 @@ while gamerunning:
     else:
         print("error")
         break
-
